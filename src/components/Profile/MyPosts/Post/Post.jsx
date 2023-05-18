@@ -8,7 +8,7 @@ const Post = (props) => {
                 <img src="https://cdn.vox-cdn.com/thumbor/YlU6hUr2mMC1UQFJRxX2wbsoZF4=/0x0:1100x580/920x613/filters:focal(520x151:696x327):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/71921482/bkq6gtrpcnw43vsm5zm62q3z.0.png"></img>
                 {props.message}
             </div>
-            <span>like</span>
+            <span>{'like ' + props.likesCount}</span>
         </div>
     );
 }
