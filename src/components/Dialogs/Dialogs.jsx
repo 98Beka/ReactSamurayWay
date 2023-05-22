@@ -1,34 +1,20 @@
 import React from "react";
 import s from './Dialogs.module.css'
 import { NavLink } from "react-router-dom";
-import { sendMessageCreator, updateNewMessageBodyCreator } from "../../redux/dialogs_reducer";
-
-
-const DialogItem = (props) => {
-    return <div className={s.dialog + ' ' + s.active}>
-        <NavLink to={"/dialogs/" + props.id}>{props.name}</NavLink>
-    </div>
-}
-
-const Message = (props) => {
-    return <div className={s.dialog}>{props.message}</div>
-}
-
 
 const Dialogs = (props) => {
 
-    let state = props.store.getState().dialogsPage;
-
+    let state = props.dialogsPage;
     let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id} />);
     let messagesElements = state.messages.map(m => <Message message={m.message} />);
     let newMessageBody = state.newMessageBody;
 
     let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator())
+        props.sendMessages();
     }
     let onNewMessageChange = (e) => {
         let body = e.target.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body));
+        props.updateNewMessageBody(body);
     }
     return (
         <div className={s.dialogs}>
@@ -47,6 +33,16 @@ const Dialogs = (props) => {
             </div>
         </div>
     )
+}
+
+const DialogItem = (props) => {
+    return <div className={s.dialog + ' ' + s.active}>
+        <NavLink to={"/dialogs/" + props.id}>{props.name}</NavLink>
+    </div>
+}
+
+const Message = (props) => {
+    return <div className={s.dialog}>{props.message}</div>
 }
 
 export default Dialogs;
