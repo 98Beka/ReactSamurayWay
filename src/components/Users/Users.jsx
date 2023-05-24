@@ -3,12 +3,15 @@ import s from './users.module.css'
 import axios from 'axios';
 
 let Users = (props) => {
-    if (props.users.length === 0) {
-        axios.get("https://127.0.0.1:7292/api/Users").then(responce => {
-            props.setUsers(responce.data);
-        });
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get("https://127.0.0.1:7292/api/Users").then(responce => {
+                props.setUsers(responce.data);
+            });
+        }
     }
     return <div>
+        <button onClick={getUsers}>get users</button>
         {
             props.users.map(u => <div key={u.id}>
                 <span>
